@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class DestroyEvil : MonoBehaviour {
 
@@ -16,6 +15,6 @@ public class DestroyEvil : MonoBehaviour {
 	void OnTriggerExit()
 	{
 		Debug.Log("Exit");
-		SendMessageUpwards("ChangeInstance", this.gameObject);
+		SendMessageUpwards("ChangeInstance", gameObject);
 	}
 }

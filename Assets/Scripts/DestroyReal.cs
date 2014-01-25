@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class DestroyReal : MonoBehaviour {
 
@@ -17,7 +16,7 @@ public class DestroyReal : MonoBehaviour {
 	void OnTriggerEnter()
 	{
 		Debug.Log("Enter");
-		SendMessageUpwards("ChangeInstance", this.gameObject);
+		SendMessageUpwards("ChangeInstance", gameObject);
 	}
 
 }
