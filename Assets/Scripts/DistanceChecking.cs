@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-
 
 
 public class DistanceChecking : MonoBehaviour 
@@ -8,7 +6,7 @@ public class DistanceChecking : MonoBehaviour
 			
 	public GameObject RealPrefab;
 	public GameObject EvilPrefab;
-	private MeshCollider col;
+	private MeshCollider _col;
 	// Use this for initialization
 	void Start () 
 	{
@@ -20,13 +18,13 @@ public class DistanceChecking : MonoBehaviour
 	
 	}
 			
-	void OnTriggerEnter(Collider other)
+	void OnTriggerEnter()
 	{
 		Instantiate(EvilPrefab, RealPrefab.transform.position, RealPrefab.transform.rotation);
 		Destroy(RealPrefab);
 	}
 			
-	void OnTriggerExit(Collider other)
+	void OnTriggerExit()
 	{
 		Instantiate(RealPrefab, transform.position, transform.rotation);
 		Destroy(EvilPrefab);
