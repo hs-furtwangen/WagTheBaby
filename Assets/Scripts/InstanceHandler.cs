@@ -22,11 +22,15 @@ public class InstanceHandler : MonoBehaviour {
         {
             if (pair.Key.name == go.name)
             {
-                Instantiate(pair.Value, pair.Value.transform.position, pair.Value.transform.rotation);
+                GameObject newGameObject = (GameObject) Instantiate(pair.Value, pair.Value.transform.position, pair.Value.transform.rotation);
+                newGameObject.transform.parent = go.transform.parent;
+                Destroy(go);
             }
             else if (pair.Value.name == go.name)
             {
-                Instantiate(pair.Key, pair.Key.transform.position, pair.Key.transform.rotation);
+                GameObject newGameObject = (GameObject)Instantiate(pair.Key, pair.Key.transform.position, pair.Key.transform.rotation);
+                newGameObject.transform.parent = go.transform.parent;
+                Destroy(go);
             }
         }
     }
