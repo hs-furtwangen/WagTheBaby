@@ -29,6 +29,7 @@ public class MouseLook : MonoBehaviour {
 	public float maximumY = 60F;
 
 	float rotationY = 0F;
+	public float RotationY{		get{ return rotationY; }	}
 
 	void Update ()
 	{
