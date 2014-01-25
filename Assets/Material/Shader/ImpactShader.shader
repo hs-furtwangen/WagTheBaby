@@ -1,7 +1,7 @@
 Shader "Custom/ImpactShader" {
 	Properties {
 		_Radius1 ("Radius", Range(0,10)) = 0.5
-		_Radius2 ("Blur Radius", Range(0,2)) = 0.1
+		_Radius2 ("Blur Radius", Range(0,10)) = 0.1
 		_InsideTex ("Inside Texture", 2D) = "white" {}
 		_OutsideTex ("Outside Texture", 2D) = "white" {}
 	}
