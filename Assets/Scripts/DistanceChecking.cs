@@ -12,12 +12,7 @@ public class DistanceChecking : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		Destroy(GetComponent<Collider>());
-		col = gameObject.AddComponent("MeshCollider") as MeshCollider;
-	
-		this.GetComponent<MeshFilter>().mesh = RealPrefab.GetComponent<MeshFilter>().mesh;
-		//this.GetComponent<Collider>().collider = RealPrefab.GetComponent<Collider>().collider;
-
+		Instantiate(RealPrefab, transform.position, transform.rotation);
 	}
 			
 	// Update is called once per frame
@@ -27,13 +22,13 @@ public class DistanceChecking : MonoBehaviour
 			
 	void OnTriggerEnter(Collider other)
 	{
-		this.GetComponent<MeshFilter>().mesh = EvilPrefab.GetComponent<MeshFilter>().mesh;
-		//this.GetComponent<Collider>().collider = EvilPrefab.GetComponent<Collider>().collider;
+		Instantiate(EvilPrefab, RealPrefab.transform.position, RealPrefab.transform.rotation);
+		Destroy(RealPrefab);
 	}
 			
 	void OnTriggerExit(Collider other)
 	{
-		this.GetComponent<MeshFilter>().mesh = RealPrefab.GetComponent<MeshFilter>().mesh;
-		//this.GetComponent<Collider>().collider = RealPrefab.GetComponent<Collider>().collider;
+		Instantiate(RealPrefab, transform.position, transform.rotation);
+		Destroy(EvilPrefab);
 	}
 }

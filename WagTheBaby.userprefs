@@ -1,8 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\DistanceChecking.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scenes\DestroyEvil.cs">
     <Files>
-      <File FileName="Assets\Scripts\DistanceChecking.cs" Line="18" Column="58" />
+      <File FileName="Assets\Scenes\DestroyEvil.cs" Line="4" Column="25" />
+      <File FileName="Assets\Scripts\InstanceHandler.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

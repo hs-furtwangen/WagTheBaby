@@ -4,11 +4,11 @@ using System.Collections;
 
 public class InstanceHandler : MonoBehaviour {
 
-    private Dictionary<GameObject, GameObject> instanceDict = new Dictionary<GameObject, GameObject>();
+    public Dictionary<GameObject, GameObject> instanceDict = new Dictionary<GameObject, GameObject>();
 
 	// Use this for initialization
 	void Start () {
-        instanceDict.Add((GameObject) Resources.Load("Cube", typeof(GameObject)), (GameObject) Resources.Load("Sphere", typeof(GameObject)));
+		instanceDict.Add((GameObject) Resources.Load<GameObject>("Cube"), (GameObject) Resources.Load<GameObject>("Sphere"));
 	}
 	
 	// Update is called once per frame
@@ -20,15 +20,17 @@ public class InstanceHandler : MonoBehaviour {
     {
         foreach (KeyValuePair<GameObject, GameObject> pair in instanceDict)
         {
-            if (pair.Key.name == go.name)
+			if (pair.Key.name == go.name || pair.Key.name + "(Clone)" == go.name)
             {
-                GameObject newGameObject = (GameObject) Instantiate(pair.Value, pair.Value.transform.position, pair.Value.transform.rotation);
+				Debug.Log("ChangeIstanceExit");
+				GameObject newGameObject = (GameObject) Instantiate(pair.Value, go.transform.position, go.transform.rotation);
                 newGameObject.transform.parent = go.transform.parent;
                 Destroy(go);
             }
-            else if (pair.Value.name == go.name)
+			else if (pair.Value.name == go.name || pair.Value.name + "(Clone)" == go.name)
             {
-                GameObject newGameObject = (GameObject)Instantiate(pair.Key, pair.Key.transform.position, pair.Key.transform.rotation);
+				Debug.Log("ChangeIstanceEnter");
+				GameObject newGameObject = (GameObject)Instantiate(pair.Key, go.transform.position, go.transform.rotation);
                 newGameObject.transform.parent = go.transform.parent;
                 Destroy(go);
             }
