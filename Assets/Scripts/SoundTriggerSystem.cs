@@ -16,9 +16,14 @@ public class SoundTriggerSystem : MonoBehaviour {
 	void Update () 
 	{
 		foreach(Transform t in triggerObjects.transform) {
-			//Debug.Log(t.gameObject.name);
+			AudioSource trig = t.gameObject.GetComponent<AudioSource>();
 			if(Vector3.Distance(t.position, this.transform.position) <= radius) {
-				t.gameObject.GetComponent<AudioSource>().Play();
+				if(trig.playOnAwake == false) {
+					trig.playOnAwake = true;
+					trig.Play();
+				}
+			} else {
+				trig.playOnAwake = false;
 			}
 		}
 	}
