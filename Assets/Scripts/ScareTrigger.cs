@@ -42,8 +42,7 @@ public class ScareTrigger : MonoBehaviour {
 					b.GetComponent<MeshRenderer>().enabled = true;
 				}
 				if(t.GetComponent<isRotatingUp>().isLooking) {
-					t.LookAt(this.transform);
-					t.localEulerAngles = new Vector3(0, t.localEulerAngles.y * -1, 0);
+					t.LookAt(this.transform, Vector3.up);
 				}
 				// Set Flag to Rotate up
 				t.GetComponent<isRotatingUp>().isRotating = true;

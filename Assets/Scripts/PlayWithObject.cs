@@ -71,6 +71,7 @@ public class PlayWithObject : MonoBehaviour {
 					key.GetComponent<BoxCollider>().enabled = false;
 					key.GetComponent<MeshRenderer>().enabled = false;
 					hasKey = true;
+					GameStateHandler.CurrentGameState = (int)GameState.RunningKey;
 				}
 
 				if(hit.rigidbody != null)
