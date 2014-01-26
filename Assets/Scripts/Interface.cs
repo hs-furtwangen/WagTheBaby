@@ -14,7 +14,7 @@ public class Interface : MonoBehaviour
 	void Start ()
 	{
 	    _startScreen = Resources.Load<Texture>("StartScreen");
-	    //_pauseScreen = Resources.Load<Texture>();
+	    _pauseScreen = Resources.Load<Texture>("PauseScreen");
 	}
 	
 	// Update is called once per frame
@@ -39,6 +39,7 @@ public class Interface : MonoBehaviour
         {
             GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height), _startScreen,ScaleMode.StretchToFill);
             GUI.Button(_topButtonRect, "Bla");
+            GUI.Button(_bottomButtonRect, "Bla");
         }
         else if (GameStateHandler.CurrentGameState == (int)GameState.Running)
         {
@@ -54,7 +55,9 @@ public class Interface : MonoBehaviour
         }
         else if (GameStateHandler.CurrentGameState == (int)GameState.Pause)
         {
-           // GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), _pauseScreen, ScaleMode.ScaleToFit);
+            GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), _startScreen, ScaleMode.StretchToFill);
+            GUI.Button(_topButtonRect, "Bla");
+            GUI.Button(_bottomButtonRect, "Bla");
         }
     }
 }
