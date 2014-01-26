@@ -3,6 +3,7 @@
     StartScreen,
     RunningLava,
     RunningIce,
+    RunningKey,
     GameOver,
     GameWin,
     Pause,
