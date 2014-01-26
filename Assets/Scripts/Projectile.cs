@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		rigidbody.AddForce(transform.forward*10, ForceMode.Impulse);
+		rigidbody.AddForce(transform.forward*8, ForceMode.Impulse);
 
 	}
 	
@@ -16,10 +16,10 @@ public class Projectile : MonoBehaviour {
 	void Update () 
 	{
 		timer += Time.deltaTime;
-		Debug.Log(timer);
+
 		if(timer > 2)
 		{
-			Debug.Log("time over");
+			//Debug.Log("time over");
 			Destroy(this.gameObject);
 		}
 	}

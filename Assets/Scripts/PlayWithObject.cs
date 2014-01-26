@@ -67,7 +67,7 @@ public class PlayWithObject : MonoBehaviour {
 						{
 							Debug.Log("Added Slingshot");
 							SlingShot = hit.rigidbody.gameObject;
-							
+							SlingShot.GetComponent<BoxCollider>().enabled = false;
 							SlingShot.collider.enabled = false;
 							SlingShot.rigidbody.isKinematic = true;
 							SlingShot.rigidbody.useGravity = false;
@@ -112,7 +112,7 @@ public class PlayWithObject : MonoBehaviour {
 
 		if(Input.GetButtonDown("Fire1") && slingActive)
 		{
-			Instantiate(Projectile, SlingShotHolder.transform.position+transform.up*0.25f, transform.rotation);
+			Instantiate(Projectile, SlingShotHolder.transform.position+transform.up*0.28f, transform.rotation);
 		}
 	}
 }
