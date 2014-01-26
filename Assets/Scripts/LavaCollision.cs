@@ -5,7 +5,7 @@ public class LavaCollision : MonoBehaviour
 
     private Vector3 RespawnPosition = new Vector3(1.97f, 1.81f, -6.14f);
 	private Vector3 RespawnRotation = new Vector3(7.94f, 129.7f, 0f);
-    private float raylength = 0.35f;
+    private float raylength = 0.57f;
 
 	private float timer = 0;
 	// Use this for initialization

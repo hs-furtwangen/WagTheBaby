@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Window : MonoBehaviour {
 
+	public Texture eis = null;
+
 	public Texture GlassCracked;
 	public Texture GlassBroken;
 	public GameObject boden;
@@ -33,7 +35,7 @@ public class Window : MonoBehaviour {
 				//Wind.transform.position = new Vector3(0,-500,0);
 				startWind = false;
 
-				boden.renderer.material.color = Color.cyan;
+
 
 			}
 		}
@@ -41,13 +43,13 @@ public class Window : MonoBehaviour {
 
 
 	}
-
-
+	
 	void OnCollisionEnter(Collision other)
 	{
 		if(other.gameObject.tag == "projectile")
 		{
 			Debug.Log("fenster getroffen");
+			boden.renderer.material.SetTexture("_InsideTex", eis);
 			this.renderer.material.mainTexture = GlassBroken;
 			this.collider.enabled = false;
 			startWind = true;

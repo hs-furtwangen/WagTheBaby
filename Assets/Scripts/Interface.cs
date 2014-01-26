@@ -47,7 +47,6 @@ public class Interface : MonoBehaviour
 
     void OnGUI()
     {
-        Debug.Log(GameStateHandler.CurrentGameState);
         if (GameStateHandler.CurrentGameState == (int) GameState.StartScreen)
         {
             GUI.backgroundColor = Color.clear;
@@ -55,7 +54,7 @@ public class Interface : MonoBehaviour
             if (GUI.Button(_topButtonRect, ""))
             {
                 GameStateHandler.CurrentGameState = (int) GameState.RunningLava;
-               // Application.LoadLevel(1);
+                Application.LoadLevel(1);
             }
             if (GUI.Button(_bottomButtonRect, ""))
             {
