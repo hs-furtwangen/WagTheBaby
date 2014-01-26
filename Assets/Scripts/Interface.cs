@@ -7,15 +7,18 @@ public class Interface : MonoBehaviour
 
     private Texture _startScreen;
     private Texture _pauseScreen;
+    private Texture _creditsScreen;
     private Rect _topButtonRect;
     private Rect _bottomButtonRect;
+    private Rect _fullScreenRect;
 
 	// Use this for initialization
 	void Start ()
 	{
 	    _startScreen = Resources.Load<Texture>("StartScreen");
-	    _pauseScreen = Resources.Load<Texture>("PauseScreen");
-	}
+        _pauseScreen = Resources.Load<Texture>("PauseScreen");
+        _creditsScreen = Resources.Load<Texture>("CreditsScreen");
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -31,33 +34,50 @@ public class Interface : MonoBehaviour
 
 	    _bottomButtonRect = _topButtonRect;
         _bottomButtonRect.y = 1589 * scaleY;
-    }
+
+	    _fullScreenRect.x = 0;
+	    _fullScreenRect.y = 0;
+	    _fullScreenRect.width = Screen.width;
+	    _fullScreenRect.height = Screen.height;
+	}
 
     void OnGUI()
     {
         if (GameStateHandler.CurrentGameState == (int) GameState.StartScreen)
         {
-            GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height), _startScreen,ScaleMode.StretchToFill);
-            GUI.Button(_topButtonRect, "Bla");
-            GUI.Button(_bottomButtonRect, "Bla");
+            GUI.backgroundColor = Color.clear;
+            GUI.DrawTexture(_fullScreenRect, _startScreen,ScaleMode.StretchToFill);
+            if (GUI.Button(_topButtonRect, ""))
+            {
+                GameStateHandler.CurrentGameState = (int) GameState.Running;
+                Application.LoadLevel(1);
+            }
+            if (GUI.Button(_bottomButtonRect, ""))
+            {
+                Application.Quit();
+            }
         }
         else if (GameStateHandler.CurrentGameState == (int)GameState.Running)
         {
-
+            
         }
         else if (GameStateHandler.CurrentGameState == (int)GameState.GameWin)
         {
-
+            Application.LoadLevel(0);
+            GameStateHandler.CurrentGameState = (int)GameState.StartScreen;
         }
         else if (GameStateHandler.CurrentGameState == (int)GameState.GameOver)
         {
-
+            Application.LoadLevel(0);
+            GameStateHandler.CurrentGameState = (int) GameState.StartScreen;
         }
         else if (GameStateHandler.CurrentGameState == (int)GameState.Pause)
         {
-            GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), _startScreen, ScaleMode.StretchToFill);
-            GUI.Button(_topButtonRect, "Bla");
-            GUI.Button(_bottomButtonRect, "Bla");
+            GUI.DrawTexture(_fullScreenRect, _startScreen, ScaleMode.StretchToFill);
+        }
+        else if (GameStateHandler.CurrentGameState == (int)GameState.Credits)
+        {
+            GUI.DrawTexture(_fullScreenRect, _startScreen, ScaleMode.StretchToFill);
         }
     }
 }

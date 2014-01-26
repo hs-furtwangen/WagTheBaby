@@ -4,7 +4,8 @@
     Running,
     GameOver,
     GameWin,
-    Pause
+    Pause,
+    Credits
 }
 public static class GameStateHandler
 {
