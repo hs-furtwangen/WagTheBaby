@@ -55,6 +55,7 @@ public class Window : MonoBehaviour {
 			startWind = true;
 			Instantiate(Wind, transform.position + Vector3.right * 2, Quaternion.Euler(new Vector3(30,270,0)));
 			//boden -> eis
+		    GameStateHandler.CurrentGameState = (int)GameState.RunningIce;
 		}
 	}
 }
