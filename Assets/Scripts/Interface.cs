@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 [ExecuteInEditMode]
 public class Interface : MonoBehaviour
@@ -49,7 +48,7 @@ public class Interface : MonoBehaviour
             GUI.DrawTexture(_fullScreenRect, _startScreen,ScaleMode.StretchToFill);
             if (GUI.Button(_topButtonRect, ""))
             {
-                GameStateHandler.CurrentGameState = (int) GameState.Running;
+                GameStateHandler.CurrentGameState = (int) GameState.RunningLava;
                 Application.LoadLevel(1);
             }
             if (GUI.Button(_bottomButtonRect, ""))
@@ -57,9 +56,13 @@ public class Interface : MonoBehaviour
                 Application.Quit();
             }
         }
-        else if (GameStateHandler.CurrentGameState == (int)GameState.Running)
+        else if (GameStateHandler.CurrentGameState == (int)GameState.RunningLava)
         {
-            
+
+        }
+        else if (GameStateHandler.CurrentGameState == (int)GameState.RunningIce)
+        {
+
         }
         else if (GameStateHandler.CurrentGameState == (int)GameState.GameWin)
         {
@@ -73,11 +76,11 @@ public class Interface : MonoBehaviour
         }
         else if (GameStateHandler.CurrentGameState == (int)GameState.Pause)
         {
-            GUI.DrawTexture(_fullScreenRect, _startScreen, ScaleMode.StretchToFill);
+            GUI.DrawTexture(_fullScreenRect, _pauseScreen, ScaleMode.StretchToFill);
         }
         else if (GameStateHandler.CurrentGameState == (int)GameState.Credits)
         {
-            GUI.DrawTexture(_fullScreenRect, _startScreen, ScaleMode.StretchToFill);
+            GUI.DrawTexture(_fullScreenRect, _creditsScreen, ScaleMode.StretchToFill);
         }
     }
 }

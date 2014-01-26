@@ -1,7 +1,8 @@
 ﻿public enum GameState
 {
     StartScreen,
-    Running,
+    RunningLava,
+    RunningIce,
     GameOver,
     GameWin,
     Pause,
