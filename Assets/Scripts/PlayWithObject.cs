@@ -6,6 +6,12 @@ public class PlayWithObject : MonoBehaviour {
 
 	GameObject toy; 
 	GameObject PlaceHolder;
+	GameObject SlingShot;
+	GameObject SlingShotHolder;
+	public GameObject Projectile;
+	bool slingActive;
+	bool sling;
+
 	Vector2 oldMousePos = Vector2.zero;
 	float impulse = 5;
 	float sensitivity = 1f;
@@ -13,6 +19,11 @@ public class PlayWithObject : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
+		SlingShot = null;
+		slingActive = false;
+		sling = false;
+		SlingShotHolder = GameObject.Find("SlingShotPlace");
+
 		toy = null;
 		PlaceHolder = GameObject.Find("PlaceHolder");
 		//mouseLook = GetComponent<MouseLook>();
@@ -20,8 +31,23 @@ public class PlayWithObject : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+	void Update () 
 	{
+
+		if(Input.GetKeyDown(KeyCode.E) && sling)
+		{
+			if (!slingActive)
+			{
+				slingActive = true;
+				SlingShot.renderer.enabled = true;
+			}
+			else
+			{
+				slingActive = false;
+				SlingShot.renderer.enabled = false;
+			}
+		}
+
 		if(Input.GetButtonDown("Fire1"))
 		{
 			RaycastHit hit;
@@ -30,28 +56,63 @@ public class PlayWithObject : MonoBehaviour {
 			{
 				if(hit.rigidbody != null)
 				{
-					toy = hit.rigidbody.gameObject;
-					toy.collider.enabled = false;
-					toy.rigidbody.isKinematic = true;
-					toy.transform.parent = transform;
-					toy.transform.position = PlaceHolder.transform.position;
+					if(sling && slingActive)
+					{
+						Debug.Log("schießen");
+	
+					}
+					else
+					{
+						if(hit.rigidbody.tag == "slingshot")
+						{
+							Debug.Log("Added Slingshot");
+							SlingShot = hit.rigidbody.gameObject;
+							
+							SlingShot.collider.enabled = false;
+							SlingShot.rigidbody.isKinematic = true;
+							SlingShot.rigidbody.useGravity = false;
+							SlingShot.transform.parent = transform;
+							SlingShot.transform.position = SlingShotHolder.transform.position;
+							SlingShot.transform.rotation = SlingShotHolder.transform.rotation;
+							slingActive = true;
+							sling = true;
+							
+						}
+						else
+						{
+							toy = hit.rigidbody.gameObject;
+							toy.collider.enabled = false;
+							toy.rigidbody.isKinematic = true;
+							toy.transform.parent = transform;
+							toy.transform.position = PlaceHolder.transform.position;		
+							toy.transform.rotation =  PlaceHolder.transform.rotation;
+						}
+					}
 
-					toy.transform.rotation =  PlaceHolder.transform.rotation;
 				}
 			}
-		}
 
+		}
+	
+
+
+	}
+
+	void FixedUpdate()
+	{
 		if(Input.GetMouseButtonUp(0) && toy != null)
 		{
 			toy.transform.parent = null;
 			toy.rigidbody.isKinematic = false;
 			toy.collider.enabled = true;
-
-			Debug.Log("direction: " + toy.transform.forward*5);
 			toy.rigidbody.AddForce(transform.forward*impulse, ForceMode.Impulse);
-
+			
 			toy = null;
 		}
-	}
 
+		if(Input.GetButtonDown("Fire1") && slingActive)
+		{
+			Instantiate(Projectile, SlingShotHolder.transform.position+transform.up*0.25f, transform.rotation);
+		}
+	}
 }
