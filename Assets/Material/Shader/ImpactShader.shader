@@ -3,8 +3,10 @@ Shader "Custom/ImpactShader" {
 		_Radius1 ("Radius", Range(0,10)) = 0.5
 		_Radius2 ("Blur Radius", Range(0,10)) = 0.1
 		_Radius3 ("Inner Alpha", Range(0,1)) = 1
-		_InsideTex ("Inside Texture", 2D) = "white" {}
-		_OutsideTex ("Outside Texture", 2D) = "white" {}
+		_InnerColor ("Inner Color Mask", COLOR) = (1,1,1,1)
+		_OuterColor ("Outer Color Mask", COLOR) = (1,1,1,1)
+		_InsideTex ("Inner Texture", 2D) = "white" {}
+		_OutsideTex ("Outer Texture", 2D) = "white" {}
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -19,6 +21,8 @@ Shader "Custom/ImpactShader" {
 		float _Radius2;
 		float _Radius3;
 		float3 _centerPos;
+		float4 _InnerColor;
+		float4 _OuterColor;
 
 		struct Input 
 		{
@@ -35,8 +39,8 @@ Shader "Custom/ImpactShader" {
 			float weight = 1 - deltaR / _Radius2;
 			weight = max(0, min(_Radius3, weight));
 			
-			o.Albedo = (weight) * insideTex + (1 - weight) * outsideTex;
-			o.Alpha = 1;
+			o.Albedo = (weight) * insideTex * _InnerColor.rgb + (1 - weight) * outsideTex * _OuterColor.rgb;
+			o.Alpha = (weight) * _InnerColor.a + (1 - weight) * _OuterColor.a;
 		}
 		ENDCG
 	} 
