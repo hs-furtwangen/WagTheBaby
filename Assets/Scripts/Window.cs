@@ -22,7 +22,7 @@ public class Window : MonoBehaviour {
 		{
 			timer += Time.deltaTime;
 
-			if(timer > 1.0f)
+			if(timer > 5.0f)
 			{
 				Debug.Log("Time over");
 				
@@ -51,7 +51,7 @@ public class Window : MonoBehaviour {
 			this.renderer.material.mainTexture = GlassBroken;
 			this.collider.enabled = false;
 			startWind = true;
-			Instantiate(Wind, transform.position, Quaternion.Euler(new Vector3(30,270,0)));
+			Instantiate(Wind, transform.position + Vector3.right * 2, Quaternion.Euler(new Vector3(30,270,0)));
 			//boden -> eis
 		}
 	}

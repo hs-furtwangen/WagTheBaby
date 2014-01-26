@@ -47,6 +47,11 @@ public class ScareTrigger : MonoBehaviour {
 				}
 				// Set Flag to Rotate up
 				t.GetComponent<isRotatingUp>().isRotating = true;
+
+				// playsound
+				if(t.GetComponent<AudioSource>()) {
+					t.GetComponent<AudioSource>().Play();
+				}
 			}
 		}
 	}

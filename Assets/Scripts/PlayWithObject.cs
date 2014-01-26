@@ -11,6 +11,7 @@ public class PlayWithObject : MonoBehaviour {
 	public GameObject Projectile;
 	bool slingActive;
 	bool sling;
+	private bool hasKey = false;
 
 	Vector2 oldMousePos = Vector2.zero;
 	float impulse = 5;
@@ -52,14 +53,31 @@ public class PlayWithObject : MonoBehaviour {
 		{
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+			if(Physics.Raycast(ray, out hit, 0.2f)) {
+				if(hit.collider && hasKey) {
+					if(hit.collider.gameObject.tag == "Klinke") {
+						Debug.Log("WIN");
+						GameStateHandler.CurrentGameState = (int)GameState.GameWin;
+					}
+				}
+			}
+
 			if (Physics.Raycast(ray, out hit, 2))
 			{
+				if(hit.collider.tag == "Key") {
+					Debug.Log("KeyPick");
+					GameObject key = hit.collider.gameObject;
+					key.GetComponent<BoxCollider>().enabled = false;
+					key.GetComponent<MeshRenderer>().enabled = false;
+					hasKey = true;
+				}
+
 				if(hit.rigidbody != null)
 				{
 					if(sling && slingActive)
 					{
 						Debug.Log("schießen");
-	
 					}
 					else
 					{
@@ -76,7 +94,7 @@ public class PlayWithObject : MonoBehaviour {
 							SlingShot.transform.rotation = SlingShotHolder.transform.rotation;
 							slingActive = true;
 							sling = true;
-							
+
 						}
 						else
 						{
