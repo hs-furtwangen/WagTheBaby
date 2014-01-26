@@ -51,7 +51,7 @@ public class Interface : MonoBehaviour
         if (GameStateHandler.CurrentGameState == (int) GameState.StartScreen)
         {
             GUI.backgroundColor = Color.clear;
-            GUI.DrawTexture(_fullScreenRect, _startScreen,ScaleMode.StretchToFill);
+            GUI.DrawTexture(_fullScreenRect, _startScreen, ScaleMode.StretchToFill);
             if (GUI.Button(_topButtonRect, ""))
             {
                 GameStateHandler.CurrentGameState = (int) GameState.RunningLava;
